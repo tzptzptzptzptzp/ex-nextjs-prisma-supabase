@@ -17,3 +17,21 @@ export const GET = async (req: Request, res: NextResponse) => {
     await prisma.$disconnect;
   }
 };
+
+// データを更新するAPI
+export const PUT = async (req: Request, res: NextResponse) => {
+  try {
+    const id: number = parseInt(req.url.split("/blog/")[1]);
+    const { title, description } = await req.json();
+    await connect();
+    const post = await prisma.post.update({
+      data: { title, description },
+      where: { id },
+    });
+    return NextResponse.json({ message: "Success", post }, { status: 200 });
+  } catch (err) {
+    return NextResponse.json({ message: "Error", err }, { status: 500 });
+  } finally {
+    await prisma.$disconnect;
+  }
+};
