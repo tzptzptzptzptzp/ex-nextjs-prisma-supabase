@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useRef } from 'react'
 
 const postBlog = async (title: string | undefined, description: string | undefined) => {
@@ -15,12 +16,15 @@ const postBlog = async (title: string | undefined, description: string | undefin
 }
 
 const AddBlog = () => {
+  const router = useRouter()
   const titleRef = useRef<HTMLInputElement | null>(null)
   const descriptionRef = useRef<HTMLTextAreaElement | null>(null)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     await postBlog(titleRef.current?.value, descriptionRef.current?.value)
+    router.push('/')
+    router.refresh()
   }
   return (
     <main className='flex flex-col items-center justify-center gap-4 w-screen h-screen'>
