@@ -18,9 +18,9 @@ const AddBlog = () => {
   const titleRef = useRef<HTMLInputElement | null>(null)
   const descriptionRef = useRef<HTMLTextAreaElement | null>(null)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    postBlog(titleRef.current?.value, descriptionRef.current?.value)
+    await postBlog(titleRef.current?.value, descriptionRef.current?.value)
   }
   return (
     <main className='flex flex-col items-center justify-center gap-4 w-screen h-screen'>
