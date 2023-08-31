@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { PostType } from "./types/posts"
 
 async function fetchAllPosts() {
@@ -26,6 +27,14 @@ export default async function Home() {
     <main className='flex flex-col items-center justify-center gap-4 w-screen h-screen'>
       <div>
         <h1 className="text-xl">Next.js Prisma Supabase Blog</h1>
+      </div>
+      <div>
+        <Link
+          href={'/blog/add'}
+          className='px-4 py-2 border rounded-md'
+        >
+          Add Post
+        </Link>
       </div>
       <div className="flex flex-col gap-4 w-1/3">
         {posts.map((post: PostType) => (
