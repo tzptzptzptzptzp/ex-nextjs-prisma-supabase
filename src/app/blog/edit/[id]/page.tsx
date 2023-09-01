@@ -1,6 +1,12 @@
 import Link from 'next/link'
 
-const EditBlog = ({ params }: { params: { id: number } }) => {
+const getBlogById = async (id: number) => {
+  const res = await fetch(`http://localhost:3000/api/blog/${id}`)
+  const data = await res.json()
+  return data.post
+}
+
+const EditBlog = () => {
   return (
     <main className='flex flex-col items-center justify-center gap-4 w-screen h-screen'>
       <div>
