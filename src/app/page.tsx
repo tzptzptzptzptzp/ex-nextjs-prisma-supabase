@@ -24,7 +24,7 @@ export default async function Home() {
   }
 
   return (
-    <main className='flex flex-col items-center justify-center gap-4 w-screen h-screen'>
+    <main className='flex flex-col items-center justify-center gap-4 w-screen min-h-screen'>
       <div>
         <h1 className="text-xl">Next.js Prisma Supabase Blog</h1>
       </div>
