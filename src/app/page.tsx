@@ -24,7 +24,7 @@ export default async function Home() {
   }
 
   return (
-    <main className='flex flex-col items-center justify-center gap-4 w-screen h-screen'>
+    <main className='flex flex-col items-center justify-center gap-4 w-screen min-h-screen'>
       <div>
         <h1 className="text-xl">Next.js Prisma Supabase Blog</h1>
       </div>
@@ -39,13 +39,21 @@ export default async function Home() {
       <div className="flex flex-col gap-4 w-1/3">
         {posts.map((post: PostType) => (
           <div className="p-8 shadow-md">
-            <div className="flex justify-between w-full">
+            <div className="flex justify-between w-full mb-4">
               <h2>
                 {post.title}
               </h2>
               <small>
                 {formatDate(post.date)}
               </small>
+            </div>
+            <div className='flex justify-center'>
+              <Link
+                href={`/blog/edit/${post.id}`}
+                className='px-2 py-1 border rounded-md'
+              >
+                Edit Post
+              </Link>
             </div>
           </div>
         ))}
