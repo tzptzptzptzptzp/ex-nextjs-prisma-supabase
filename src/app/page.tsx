@@ -39,13 +39,21 @@ export default async function Home() {
       <div className="flex flex-col gap-4 w-1/3">
         {posts.map((post: PostType) => (
           <div className="p-8 shadow-md">
-            <div className="flex justify-between w-full">
+            <div className="flex justify-between w-full mb-4">
               <h2>
                 {post.title}
               </h2>
               <small>
                 {formatDate(post.date)}
               </small>
+            </div>
+            <div className='flex justify-center'>
+              <Link
+                href={`/blog/edit/${post.id}`}
+                className='px-2 py-1 border rounded-md'
+              >
+                Edit Post
+              </Link>
             </div>
           </div>
         ))}
