@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { PostType } from "./types/posts"
+import { Toaster, toast } from 'react-hot-toast'
 
 async function fetchAllPosts() {
   const res = await fetch('http://localhost:3000/api/blog', {
@@ -9,8 +10,16 @@ async function fetchAllPosts() {
   return data.posts
 }
 
-export default async function Home() {
+const deleteBlog = async (id: number) => {
+  const res = await fetch(`http://localhost:3000/api/blog/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+}
 
+export default async function Home() {
   const posts = await fetchAllPosts()
 
   const formatDate = (date: Date) => {
@@ -23,8 +32,12 @@ export default async function Home() {
     });
   }
 
+  const handleDelete = async (id: number) => {
+  };
+
   return (
     <main className='flex flex-col items-center justify-center gap-4 w-screen min-h-screen'>
+      <Toaster />
       <div>
         <h1 className="text-xl">Next.js Prisma Supabase Blog</h1>
       </div>
@@ -54,6 +67,12 @@ export default async function Home() {
               >
                 Edit Post
               </Link>
+              <button
+                onClick={handleDelete(post.id)}
+                className='px-2 py-1 border rounded-md'
+              >
+                Delete Post
+              </button>
             </div>
           </div>
         ))}
