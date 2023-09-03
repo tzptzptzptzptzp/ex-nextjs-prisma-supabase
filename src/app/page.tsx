@@ -10,15 +10,6 @@ async function fetchAllPosts() {
   return data.posts
 }
 
-const deleteBlog = async (id: number) => {
-  const res = await fetch(`http://localhost:3000/api/blog/${id}`, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-}
-
 export default async function Home() {
   const posts = await fetchAllPosts()
 
@@ -31,9 +22,6 @@ export default async function Home() {
       minute: 'numeric',
     });
   }
-
-  const handleDelete = async (id: number) => {
-  };
 
   return (
     <main className='flex flex-col items-center justify-center gap-4 w-screen min-h-screen'>
@@ -67,12 +55,6 @@ export default async function Home() {
               >
                 Edit Post
               </Link>
-              <button
-                onClick={handleDelete(post.id)}
-                className='px-2 py-1 border rounded-md'
-              >
-                Delete Post
-              </button>
             </div>
           </div>
         ))}
