@@ -21,6 +21,15 @@ const editBlog = async (title: string | undefined, description: string | undefin
   })
 }
 
+const deleteBlog = async (id: number) => {
+  const res = await fetch(`http://localhost:3000/api/blog/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+}
+
 const EditBlog = ({ params }: { params: { id: number } }) => {
   const router = useRouter()
   const titleRef = useRef<HTMLInputElement | null>(null)
@@ -47,6 +56,15 @@ const EditBlog = ({ params }: { params: { id: number } }) => {
     router.push('/')
     router.refresh()
   }
+
+  const handleDelete = () => {
+    toast.loading('Delete in progress')
+    deleteBlog(params.id)
+    toast.success('Deletion was successful.')
+    router.push('/')
+    router.refresh()
+  };
+
   return (
     <main className='flex flex-col items-center justify-center gap-4 w-screen h-screen'>
       <Toaster />
@@ -67,11 +85,17 @@ const EditBlog = ({ params }: { params: { id: number } }) => {
             rows={3}
             className="px-4 py-2 border rounded-md"
           />
-          <div className="flex justify-center">
+          <div className="flex justify-center gap-4">
             <button
               className='px-4 py-2 border rounded-md hover:shadow-md'
             >
               Submit
+            </button>
+            <button
+              onClick={handleDelete}
+              className='px-2 py-1 border rounded-md'
+            >
+              Delete Post
             </button>
           </div>
         </form>
